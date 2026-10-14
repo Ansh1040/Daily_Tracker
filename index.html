@@ -4,18 +4,21 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="A read-only calendar of Ansh's published CS GATE study progress.">
   <title>Daily study calendar · Ansh</title>
-  <link rel="stylesheet" href="calendar.css"><script src="calendar.js" defer></script>
+  <link rel="stylesheet" href="calendar.css"><link rel="stylesheet" href="course.css"><script src="calendar.js" defer></script><script src="course.js" defer></script>
 </head>
 <body>
   <main>
     <header><div><p class="eyebrow">ANSH / CS GATE</p><h1>One day at a time.</h1><p class="intro">Your study journey, viewed through a calendar.</p></div><span class="badge">Read-only view</span></header>
     <div class="toolbar"><p id="status" role="status">Loading published progress…</p><button id="refresh" type="button">Refresh data ↻</button></div>
     <section class="metrics" aria-label="Monthly summary"><article><p>Focused this month</p><strong id="minutes">—</strong></article><article><p>Active days this month</p><strong id="active">—</strong></article><article><p>Current study streak</p><strong id="streak">—</strong></article></section>
+    <section class="filters"><label>Subject <select id="subject"><option value="">All subjects</option></select></label><label>Resource <select id="type"><option value="">All resources</option><option value="pdf">DPP PDFs</option><option value="quiz">DPP quizzes</option><option value="video">DPP discussions</option></select></label><div id="subject-legend"></div></section>
+    <p class="data-note" id="coverage">Loading course inventory…</p>
     <section class="calendar-shell" aria-label="Daily progress calendar">
       <div class="calendar"><div class="month-toolbar"><div><p class="eyebrow">DAILY CONSISTENCY</p><h2 id="month">Calendar</h2></div><nav aria-label="Calendar navigation"><button id="previous" aria-label="Previous month">‹</button><button id="today">Today</button><button id="next" aria-label="Next month">›</button></nav></div><div class="weekdays" aria-hidden="true"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div><div id="days" class="days" aria-label="Dates"></div><div class="legend"><span>Study intensity</span><i class="level0"></i><i class="level1"></i><i class="level2"></i><i class="level3"></i><i class="level4"></i><span>More</span></div></div>
       <aside><p class="eyebrow">SELECTED DAY</p><h2 id="selected">—</h2><p id="day-total" class="day-total"></p><div id="details"></div></aside>
     </section>
-    <footer><p>Displays dated sessions and scores from your published tracker.<br>Missing dates mean no recorded activity, not necessarily no study.</p><a href="https://ansh1040.github.io/New/" target="_blank" rel="noopener">View full progress ↗</a></footer>
+    <section class="undated"><h2>Dates unavailable</h2><p class="data-note">The tracker saves chapter completion counts and test status, but no individual lecture upload dates or test schedule dates.</p><details><summary id="chapter-summary">Completed lectures</summary><div id="chapters"></div></details><details><summary id="test-summary">Test inventory</summary><div id="test-inventory"></div></details></section>
+    <footer><p>DPP entries use their release date, not their completion date.<br>Missing years use the snapshot year and are labelled as inferred.</p><a href="https://ansh1040.github.io/New/" target="_blank" rel="noopener">View full progress ↗</a></footer>
   </main>
 </body>
 </html>
