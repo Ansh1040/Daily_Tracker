@@ -28,6 +28,11 @@ function releaseDate(label,capturedAt){
   return {value,inferred:!match[3]};
 }
 function matching(event){return (!$("subject").value||event.subject===$("subject").value)&&(!$("type").value||event.type===$("type").value);}
+function allTasksCompleted(date){
+  const tasks=courseEvents.filter(event=>event.date===date),logged=records.get(date);
+  const count=tasks.length+(logged?.sessions.length||0)+(logged?.tests.length||0);
+  return date<=todayKey&&count>0&&tasks.every(task=>task.status==="completed");
+}
 function courseCard(event){
   const card=element("article",undefined,`entry course-entry kind-${event.type}`);card.style.borderLeftColor=colours.get(event.subject)||"#a0b5a7";
   card.append(element("span",({pdf:"DPP PDF",quiz:"DPP quiz",video:"DPP discussion",lecture:"Lecture count",test:"Test"}[event.type]||event.type),"kind"),element("strong",event.title),element("p",event.subject));
@@ -38,12 +43,14 @@ const baseRender=render,baseDetails=renderDetails;
 renderDetails=function(){
   baseDetails();const events=courseEvents.filter(e=>e.date===selected&&matching(e));
   if(events.length){$("details").querySelector('.empty')?.remove();$("details").append(...events.map(courseCard));}
+  if(allTasksCompleted(selected))$("details").prepend(element("p","✓ All tasks on this date are completed","all-done-message"));
 };
 render=function(){
   baseRender();$("next").disabled=false;
-  const start=shift(month,-((month.getDay()+6)%7));
+  const start=shift(month,-month.getDay());
   [...$("days").children].forEach((button,index)=>{
     const date=key(shift(start,index)),events=courseEvents.filter(e=>e.date===date&&matching(e));button.disabled=false;
+    if(allTasksCompleted(date)){button.classList.add("all-tasks-complete");button.append(element("small","✓ All done","all-done-label"));button.setAttribute("aria-label",button.getAttribute("aria-label")+", all tasks completed");}
     if(events.length){const markers=element("div",undefined,"markers");for(const subject of [...new Set(events.map(e=>e.subject))]){const dot=element("i");dot.style.backgroundColor=colours.get(subject);dot.title=subject;markers.append(dot);}button.append(markers,element("small",`${events.length} records`));const done=events.filter(e=>e.status==="completed").length;if(done)button.append(element("small",`✓ ${done} completed`,"completion-count"));button.setAttribute("aria-label",button.getAttribute("aria-label")+`, ${events.length} course records, ${done} completed`);}
   });
   renderWeekly();

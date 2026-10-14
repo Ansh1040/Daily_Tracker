@@ -19,7 +19,7 @@ function render(){
   let streak=0,cursor=parse(todayKey);if(!active(todayKey))cursor=shift(cursor,-1);while(active(key(cursor))){streak++;cursor=shift(cursor,-1);}
   $("streak").textContent=loaded?`${streak} ${streak===1?"day":"days"}`:"—";
   $("next").disabled=key(month).slice(0,7)>=todayKey.slice(0,7);
-  const start=shift(month,-((month.getDay()+6)%7)), cells=[];
+  const start=shift(month,-month.getDay()), cells=[];
   for(let index=0;index<42;index++){
     const date=shift(start,index),dateKey=key(date),item=activity(dateKey),future=dateKey>todayKey;
     const level=!active(dateKey)?0:item.minutes<=30?1:item.minutes<=60?2:item.minutes<=120?3:4;
