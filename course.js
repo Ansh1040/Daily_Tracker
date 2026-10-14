@@ -28,10 +28,10 @@ function releaseDate(label,capturedAt){
   return {value,inferred:!match[3]};
 }
 function matching(event){return (!$("subject").value||event.subject===$("subject").value)&&(!$("type").value||event.type===$("type").value);}
+function isCompletionTask(event){return event.type==="quiz"||(event.type==="test"&&/\bweekly\s+test\b/i.test(event.title));}
 function allTasksCompleted(date){
-  const tasks=courseEvents.filter(event=>event.date===date),logged=records.get(date);
-  const count=tasks.length+(logged?.sessions.length||0)+(logged?.tests.length||0);
-  return date<=todayKey&&count>0&&tasks.every(task=>task.status==="completed");
+  const tasks=courseEvents.filter(event=>event.date===date&&isCompletionTask(event));
+  return date<=todayKey&&tasks.length>0&&tasks.every(task=>task.status==="completed");
 }
 function courseCard(event){
   const card=element("article",undefined,`entry course-entry kind-${event.type}`);card.style.borderLeftColor=colours.get(event.subject)||"#a0b5a7";
@@ -43,7 +43,7 @@ const baseRender=render,baseDetails=renderDetails;
 renderDetails=function(){
   baseDetails();const events=courseEvents.filter(e=>e.date===selected&&matching(e));
   if(events.length){$("details").querySelector('.empty')?.remove();$("details").append(...events.map(courseCard));}
-  if(allTasksCompleted(selected))$("details").prepend(element("p","✓ All tasks on this date are completed","all-done-message"));
+  if(allTasksCompleted(selected))$("details").prepend(element("p","✓ All DPP quizzes and weekly tests on this date are completed","all-done-message"));
 };
 render=function(){
   baseRender();$("next").disabled=false;
