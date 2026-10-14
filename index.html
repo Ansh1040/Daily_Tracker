@@ -4,11 +4,12 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="A read-only calendar of Ansh's published CS GATE study progress.">
   <title>Daily study calendar · Ansh</title>
-  <link rel="stylesheet" href="calendar.css"><link rel="stylesheet" href="course.css?v=tasks-4"><script src="calendar.js?v=tasks-4" defer></script><script src="course.js?v=tasks-4" defer></script>
+  <meta name="theme-color" content="#0d1119">
+  <link rel="stylesheet" href="calendar.css"><link rel="stylesheet" href="course.css?v=tasks-4"><link rel="stylesheet" href="midnight-ember.css?v=1"><script src="calendar.js?v=tasks-4" defer></script><script src="course.js?v=tasks-4" defer></script>
 </head>
 <body>
   <main>
-    <header><div><p class="eyebrow">ANSH / CS GATE</p><h1>One day at a time.</h1><p class="intro">Your study journey, viewed through a calendar.</p></div><span class="badge">Read-only view</span></header>
+    <header><div><p class="eyebrow">ANSH / CS GATE</p><h1>Daily study calendar</h1><p class="intro">Your study journey, one day at a time.</p></div><span class="badge">Read-only view</span></header>
     <div class="toolbar"><p id="status" role="status">Loading published progress…</p><button id="refresh" type="button">Refresh data ↻</button></div>
     <section class="metrics" aria-label="Monthly summary"><article><p>Focused this month</p><strong id="minutes">—</strong></article><article><p>Active days this month</p><strong id="active">—</strong></article><article><p>Current study streak</p><strong id="streak">—</strong></article></section>
     <section class="filters"><label>Subject <select id="subject"><option value="">All subjects</option></select></label><label>Resource <select id="type"><option value="">All resources</option><option value="pdf">DPP PDFs</option><option value="quiz">DPP quizzes</option><option value="video">DPP discussions</option><option value="test">Scheduled tests</option></select></label><div id="subject-legend"></div></section>

@@ -1,0 +1,62 @@
+/* Midnight Ember: matte slate surfaces, tangerine accents and a quiet warm glow. */
+:root {
+  --page: #0d1119;
+  --surface: #151b25;
+  --line: #2b3342;
+  --ink: #f1f3fa;
+  --muted: #a7b0c3;
+  --accent: #ff9b63;
+  --lavender: #c2b2f5;
+}
+body {
+  background: radial-gradient(ellipse 650px 380px at 0 0, rgba(177, 78, 37, .12), transparent 75%), var(--page);
+}
+main { padding-top: 48px; }
+header { margin-bottom: 26px; }
+header .eyebrow { border-left: 3px solid var(--accent); padding-left: 12px; }
+h1 { font-size: clamp(27px, 4vw, 38px); font-weight: 650; letter-spacing: -.035em; }
+.intro { font-size: 13px; }
+.badge { background: #202631; border-color: #353d4d; color: var(--lavender); border-radius: 8px; }
+button { background: #1a212d; border-radius: 8px; transition: background .15s, border-color .15s; }
+button:hover { background: #242b38; }
+button:focus-visible, a:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.metrics, .calendar-shell, .filters, .weekly, .undated { border-radius: 12px; }
+.metrics strong { font-size: 25px; }
+.metrics article { padding: 20px 24px; }
+.filters { padding: 16px 18px; }
+.filters select, .test-filter select { background: #10151e; border-radius: 7px; }
+#subject-legend span { background: #10151e; color: #cbd1df; }
+.month-toolbar h2 { color: var(--ink); }
+#today { color: var(--accent); }
+.day { border: 1px solid #252d3a; border-radius: 7px; }
+.day:hover { background: #202735; }
+.level0 { background: #171d28; }
+.level1 { background: #343042; }
+.level2 { background: #57434b; }
+.level3 { background: #9c6249; color: #fff3ec; }
+.level4 { background: #ff9b63; color: #23150d; }
+.day[aria-pressed=true] { outline-color: var(--accent); box-shadow: 0 0 0 1px rgba(255,155,99,.1); }
+.outside { opacity: .42; }
+.weekdays { color: #b2bed4; }
+aside { background: #111721; }
+aside > .eyebrow { color: var(--lavender); }
+.empty { background: #131a25; border-radius: 8px; }
+.course-entry { background: #191f2b; border-bottom-color: var(--line); border-radius: 8px; }
+.kind { border-color: #3c4559; border-radius: 5px; }
+.kind-quiz .kind { color: var(--lavender); }
+.kind-test .kind { color: #ffaf83; }
+.weekly-toggle, .undated summary { color: var(--accent); }
+.weekly-chevron { font-size: 20px; }
+.weekly-content { border-top: 1px solid var(--line); padding-top: 22px; }
+.day.all-tasks-complete, .day.all-tasks-complete:hover { background: #153c2d; border-color: #72c792; color: #eaffed; box-shadow: none; }
+.all-done-message { background: #153c2d; border-color: #72c792; }
+.entry .record-status.completed { background: #153c2d; border-color: #416b50; color: #b4edc2; }
+.completion-count { color: #b4edc2; }
+footer a { color: var(--lavender); }
+@media (max-width: 480px) {
+  main { padding-top: 28px; }
+  .metrics article { padding: 16px 11px; }
+  .metrics strong { font-size: 19px; }
+  .weekly, .undated { padding: 18px; }
+}
+@media (prefers-reduced-motion: reduce) { button { transition: none; } }
